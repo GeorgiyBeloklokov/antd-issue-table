@@ -1,0 +1,130 @@
+import { FC, useState } from "react";
+import { Table, Layout } from 'antd';
+import type { ColumnsType, TableProps } from 'antd/es/table';
+import styled from 'styled-components';
+
+function App() {
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+ 
+  interface DataType {
+  key: React.Key;
+  name: string;
+  age: number;
+  address: string;
+  job: string;
+  car: string;
+  childrens: string;
+}
+
+
+
+const columns: ColumnsType<DataType> = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+  },
+  {
+    title: 'Job',
+    dataIndex: 'job',
+  },
+  {
+    title: 'Car',
+    dataIndex: 'car',
+  },
+  {
+    title: 'Car',
+    dataIndex: 'car',
+  },
+  {
+    title: 'Car',
+    dataIndex: 'car',
+  },
+  {
+    title: 'Children',
+    dataIndex: 'childrens',
+  },
+];
+
+const data: DataType[] = [];
+for (let i = 0; i < 40; i++) {
+  data.push({
+    key: i,
+    name: `Edward King ${i}`,
+    age: 32,
+    address: `London, Park Lane no. ${i}`,
+    job: 'worker',
+    car: 'any',
+    childrens: '5'
+  });
+}
+
+  const rowSelection = {
+    selectedRowKeys
+  };
+
+  const TableWrapper: FC<TableProps<DataType>> = styled(Table)`
+  box-shadow: 0 0 10px 0 rgba(2, 122, 149, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+ 
+
+  .ant-table-thead .ant-table-cell,
+  .ant-table-thead .ant-table-column-sorters span {
+    font-weight: 500;
+  }
+
+  .ant-table-cell {
+    padding: 10px 8px !important;
+    border: none !important;
+   
+  }
+
+  .ant-table-tbody .ant-table-row:nth-child(odd) td {
+    background: #f9fafb !important;
+  }
+
+  .ant-table-column-sorters::after,
+  .ant-table-cell::before {
+    display: none;
+  }
+`;
+
+  return (
+    <div className="App">
+  
+    <div style={{
+          height: '100%',
+          width: '80%',
+          overflowX: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'relative',
+        }}
+        
+      >
+    <TableWrapper 
+          virtual={true}
+          scroll={{ y: 200, x: 1800 }}  
+          pagination={false} 
+          rowSelection={{...rowSelection, hideSelectAll: true, columnWidth: 48 }} 
+          columns={columns} 
+          dataSource={data } />
+          
+       
+          
+          </div>
+    
+    </div>
+  );
+};
+
+export default App;
+
